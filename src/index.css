@@ -1,0 +1,441 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   拍立得照相馆 — Design System
+   Aesthetic: a warm analog photo studio. Cream paper, ink-dark type,
+   amber accents, Polaroid white cards floating on a textured desk.
+   ========================================================================== */
+
+@theme {
+  --color-cream: #f4efe6;
+  --color-cream-deep: #e8dfd0;
+  --color-paper: #fbf8f3;
+  --color-ink: #1b1815;
+  --color-ink-soft: #4a423a;
+  --color-ink-faint: #8a7f72;
+  --color-amber: #d97742;
+  --color-amber-deep: #b45a2b;
+  --color-sage: #7d8c6d;
+  --color-plum: #4a3b52;
+  --color-fuji-red: #d0342c;
+  --color-fuji-black: #1c1c1f;
+  --color-fuji-silver: #d8d8d2;
+
+  --font-display: "Fraunces", "Songti SC", "Noto Serif SC", Georgia, serif;
+  --font-hand: "Caveat", "Segoe Script", "STKaiti", cursive;
+  --font-mono: "Space Mono", "Courier New", monospace;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --shadow-card: 0 2px 4px rgba(60, 45, 30, 0.08), 0 12px 28px rgba(60, 45, 30, 0.14);
+  --shadow-lift: 0 4px 8px rgba(60, 45, 30, 0.1), 0 22px 50px rgba(60, 45, 30, 0.22);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background-color: var(--color-cream);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* The whole app sits on a desk: warm paper + a soft vignette + grain. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -10%, #fffaf2 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 12% 8%, rgba(217, 119, 66, 0.1) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 88% 92%, rgba(125, 140, 109, 0.12) 0%, transparent 55%),
+      linear-gradient(178deg, #f6f1e8 0%, #eee6d8 100%);
+  }
+
+  /* Film grain overlay — pure CSS, no image assets. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: var(--color-amber);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  button {
+    font-family: inherit;
+  }
+}
+
+@layer components {
+  /* --- Paper card ------------------------------------------------------ */
+  .paper-card {
+    background: var(--color-paper);
+    border: 1px solid rgba(60, 45, 30, 0.1);
+    border-radius: 4px;
+    box-shadow: var(--shadow-card);
+  }
+
+  /* --- Primary button --------------------------------------------------- */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition:
+      transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.18s ease,
+      background-color 0.18s ease,
+      opacity 0.18s ease;
+    user-select: none;
+  }
+
+  .btn:active:not(:disabled) {
+    transform: translateY(1px) scale(0.985);
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .btn-primary {
+    background: var(--color-ink);
+    color: var(--color-cream);
+    box-shadow: 0 2px 0 rgba(27, 24, 21, 0.9);
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #2f2925;
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 0 rgba(27, 24, 21, 0.9),
+      0 10px 22px rgba(60, 45, 30, 0.24);
+  }
+
+  .btn-accent {
+    background: var(--color-amber);
+    color: #fff;
+    box-shadow: 0 2px 0 var(--color-amber-deep);
+  }
+
+  .btn-accent:hover:not(:disabled) {
+    background: #e0824c;
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 0 var(--color-amber-deep),
+      0 10px 22px rgba(217, 119, 66, 0.3);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink-soft);
+    border-color: rgba(60, 45, 30, 0.18);
+  }
+
+  .btn-ghost:hover:not(:disabled) {
+    background: rgba(60, 45, 30, 0.06);
+    color: var(--color-ink);
+    border-color: rgba(60, 45, 30, 0.3);
+  }
+
+  .btn-sm {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.75rem;
+  }
+
+  /* --- Icon button ------------------------------------------------------ */
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    border: 1px solid rgba(60, 45, 30, 0.16);
+    background: var(--color-paper);
+    color: var(--color-ink-soft);
+    cursor: pointer;
+    transition:
+      transform 0.16s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 0.16s ease,
+      color 0.16s ease;
+  }
+
+  .icon-btn:hover {
+    background: #fff;
+    color: var(--color-ink);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .icon-btn:active {
+    transform: translateY(0);
+  }
+
+  /* --- Rubber stamp ----------------------------------------------------- */
+  .stamp {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    padding: 0.2rem 0.5rem;
+    opacity: 0.75;
+  }
+
+  /* --- Hairline divider ------------------------------------------------- */
+  .rule {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(60, 45, 30, 0.2) 15%,
+      rgba(60, 45, 30, 0.2) 85%,
+      transparent
+    );
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-hand {
+    font-family: var(--font-hand);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* Handwriting that reads like a real pen on instant film. */
+  .writing {
+    font-family: var(--font-hand);
+    color: #2a231d;
+    line-height: 1.1;
+  }
+
+  /* --- The "developing" reveal ------------------------------------------
+     Real instant film emerges from the darkness: desaturated and blown-out
+     at first, then settles into full colour.
+     ------------------------------------------------------------------- */
+  .developing {
+    animation: develop 2.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  @keyframes develop {
+    0% {
+      filter: saturate(0.2) contrast(0.72) brightness(1.22);
+      opacity: 0;
+      transform: scale(1.035);
+    }
+    22% {
+      opacity: 1;
+      filter: saturate(0.45) contrast(0.8) brightness(1.12);
+      transform: scale(1.018);
+    }
+    55% {
+      filter: saturate(0.8) contrast(0.95) brightness(1.03);
+      transform: scale(1.006);
+    }
+    100% {
+      filter: saturate(1) contrast(1) brightness(1);
+      transform: scale(1);
+    }
+  }
+
+  /* The white bloom that washes over the frame while it develops. */
+  .bloom {
+    animation: bloom 2.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  @keyframes bloom {
+    0% {
+      opacity: 0.55;
+    }
+    30% {
+      opacity: 0.28;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* --- Shutter flash ---------------------------------------------------- */
+  .flash-overlay {
+    animation: flashfire 140ms ease-out both;
+  }
+
+  @keyframes flashfire {
+    0% {
+      opacity: 0.92;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* --- Countdown digit --------------------------------------------------- */
+  .countdown-digit {
+    animation: countpop 1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  @keyframes countpop {
+    0% {
+      opacity: 0;
+      transform: scale(1.55);
+      filter: blur(8px);
+    }
+    22% {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+    78% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.88);
+    }
+  }
+
+  /* --- Shake on capture -------------------------------------------------- */
+  .shutter-shake {
+    animation: shake 320ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  }
+
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%,
+    80% {
+      transform: translate3d(3px, 0, 0);
+    }
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-6px, 0, 0);
+    }
+    40%,
+    60% {
+      transform: translate3d(6px, 0, 0);
+    }
+  }
+
+  /* --- Floating strip entrance ------------------------------------------ */
+  .strip-in {
+    animation: stripin 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  @keyframes stripin {
+    0% {
+      opacity: 0;
+      transform: translateY(26px) rotate(-2deg) scale(0.94);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+  }
+
+  /* --- Sway for idle gallery cards -------------------------------------- */
+  .sway {
+    animation: sway 6s ease-in-out infinite;
+  }
+
+  @keyframes sway {
+    0%,
+    100% {
+      transform: rotate(var(--sway, -2deg));
+    }
+    50% {
+      transform: rotate(calc(var(--sway, -2deg) + 1.6deg));
+    }
+  }
+
+  /* --- Slow drift of the ambient blobs ---------------------------------- */
+  .drift {
+    animation: drift 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    100% {
+      transform: translate3d(28px, -22px, 0) scale(1.12);
+    }
+  }
+}
+
+/* --- Respect reduced-motion ---------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --- Scrollbar ------------------------------------------------------------ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(60, 45, 30, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(60, 45, 30, 0.22);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(60, 45, 30, 0.36);
+  background-clip: content-box;
+}

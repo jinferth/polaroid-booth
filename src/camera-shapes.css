@@ -1,0 +1,486 @@
+/* ==========================================================================
+   Camera body structural variants
+   ---------------------------------------------------------------------------
+   Each family is a genuinely different machine, not a recolour. The
+   differences live here:
+
+     .shape-mini     rounded consumer body, offset lens, twist ring, side flash
+     .shape-evo      boxy retro, TWO dials (lens + film), top print lever
+     .shape-sx70     long folding body, twin top wheels, chrome/leather split
+     .shape-onestep  square body, rainbow stripe, big centred lens
+     .shape-rangefinder / .shape-bubble / .shape-boxy  — existing looks
+
+   All measurements are in `em` against `.cam-shell { font-size: 1% of width }`
+   so a variant scales with the machine like everything else.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Shared: every variant gets a print slot and a body; only the geometry and
+   the control furniture change.
+   ----------------------------------------------------------------------- */
+
+/* --- mini: rounded, twist-to-power, offset lens ------------------------- */
+.cam-shell.shape-mini {
+  height: calc(var(--cam-w) * 1.92);
+}
+
+.cam-shell.shape-mini .cam-body {
+  top: 100em;
+  height: 88em;
+  border-radius: 26em 26em 20em 20em;
+}
+
+/* Big rounded lens ring, off-centre to the left. */
+.cam-shell.shape-mini .cam-lens {
+  top: 16em;
+  left: 10em;
+  width: 56em;
+  height: 56em;
+  border-width: 1.1em;
+}
+
+/* Twist ring: a wide toothed band, the Mini's signature power control. */
+.cam-shell.shape-mini .cam-lens-ring-knurl {
+  inset: 3.2em;
+  border-width: 0.6em;
+  background: repeating-conic-gradient(
+    var(--fuji-silver-lo) 0 3deg,
+    var(--fuji-silver) 3deg 6deg
+  );
+}
+
+/* Flash sits to the upper-right of the lens on a Mini. */
+.cam-shell.shape-mini .cam-flashwin {
+  top: 15em;
+  left: auto;
+  right: 8em;
+  width: 17em;
+  height: 17em;
+  border-radius: 3em;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0 20%, transparent 20%),
+    radial-gradient(circle at 50% 45%, #fffdf6 0 34%, #dcdcd4 60%, #b8b8b0 100%);
+}
+
+/* Finder sits high on the right shoulder. */
+.cam-shell.shape-mini .cam-finder {
+  top: 6em;
+  right: 9em;
+  width: 12em;
+  height: 8.5em;
+  border-radius: 2.6em;
+}
+
+.cam-shell.shape-mini .cam-led {
+  top: 8em;
+  left: 9em;
+}
+
+/* Mini has no shoulder shutter — the shutter is a big round button on the
+   body face, right of the lens. */
+.cam-shell.shape-mini .cam-shutter {
+  top: 20em;
+  right: 9em;
+  width: 14em;
+  height: 14em;
+  border-radius: 50%;
+  border-width: 0.9em;
+}
+
+.cam-shell.shape-mini .cam-shutter-hint {
+  top: 36em;
+  right: 6em;
+}
+
+/* The Mini's brand sits low-left, small. */
+.cam-shell.shape-mini .cam-brand {
+  left: 9em;
+  bottom: 7em;
+}
+
+.cam-shell.shape-mini .cam-brand strong {
+  font-size: 2.6em;
+  letter-spacing: 0.1em;
+}
+
+/* No film dial on a Mini — the twist ring does that job. */
+.cam-shell.shape-mini .cam-simdial {
+  display: none;
+}
+
+/* --- evo: boxy retro with two dials ------------------------------------ */
+.cam-shell.shape-evo {
+  height: calc(var(--cam-w) * 1.95);
+}
+
+.cam-shell.shape-evo .cam-body {
+  top: 104em;
+  height: 90em;
+  border-radius: 3em;
+}
+
+/* Large front plate: the Evo is dominated by its face. */
+.cam-shell.shape-evo .cam-lens {
+  top: 14em;
+  left: 12em;
+  width: 54em;
+  height: 54em;
+  border-width: 0.9em;
+}
+
+.cam-shell.shape-evo .cam-lens-ring-outer {
+  inset: 2.2em;
+  border-width: 0.7em;
+}
+
+.cam-shell.shape-evo .cam-lens-ring-knurl {
+  inset: 1.9em;
+  border-width: 0.5em;
+}
+
+.cam-shell.shape-evo .cam-flashwin {
+  top: 8em;
+  left: auto;
+  right: 9em;
+  width: 15em;
+  height: 9em;
+  border-radius: 1em;
+}
+
+.cam-shell.shape-evo .cam-finder {
+  top: 9em;
+  right: 30em;
+  width: 13em;
+  height: 9em;
+  border-radius: 0.8em;
+}
+
+.cam-shell.shape-evo .cam-led {
+  top: 8em;
+  left: 7em;
+}
+
+/* Evo's shutter is a slim bar on the top plate. */
+.cam-shell.shape-evo .cam-shutter {
+  top: 96em;
+  right: 9em;
+  width: 14em;
+  height: 9em;
+  border-radius: 1.2em 1.2em 0.4em 0.4em;
+}
+
+.cam-shell.shape-evo .cam-shutter-hint {
+  top: 106em;
+  right: 6em;
+}
+
+.cam-shell.shape-evo .cam-brand {
+  left: 8em;
+  bottom: 6em;
+}
+
+/* Evo's signature: a second dial, side by side with the film dial. */
+.cam-shell.shape-evo .cam-simdial {
+  right: 6em;
+  bottom: 5em;
+}
+
+.cam-shell.shape-evo .cam-knob {
+  width: 10em;
+  height: 10em;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.45) 0 16%, transparent 45%),
+    repeating-conic-gradient(var(--fuji-silver-lo) 0 6deg, var(--fuji-silver) 6deg 12deg);
+}
+
+/* The lens dial sits to the left of the film dial. */
+.cam-shell.shape-evo .cam-lensdial {
+  display: grid;
+}
+
+/* --- sx70: long folding body with twin top wheels ---------------------- */
+.cam-shell.shape-sx70 {
+  /* The SX-70 is a long, low slab — much wider than it is tall. */
+  height: calc(var(--cam-w) * 1.62);
+}
+
+.cam-shell.shape-sx70 .cam-print-slot {
+  left: 26em;
+  width: 48em;
+  height: 60em;
+}
+
+.cam-shell.shape-sx70 .cam-print {
+  width: 44em;
+  height: 58em;
+}
+
+.cam-shell.shape-sx70 .cam-body {
+  top: 78em;
+  height: 78em;
+  border-radius: 5em 5em 3em 3em;
+}
+
+/* The SX-70's leather wraps the lower two-thirds; chrome is only the lid. */
+.cam-shell.shape-sx70 .cam-body {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.6) 0 1.2em,
+      transparent 1.2em
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.02) 0 1em,
+      transparent 1em 2em
+    ),
+    linear-gradient(
+      180deg,
+      var(--fuji-silver-hi) 0%,
+      var(--fuji-silver) 14%,
+      var(--fuji-silver-lo) 20%,
+      var(--fuji-leather) 21%,
+      var(--fuji-black-lo) 100%
+    );
+}
+
+/* Wide, shallow lens block — the SX-70 lens is set into a broad panel. */
+.cam-shell.shape-sx70 .cam-lens {
+  top: 22em;
+  left: 22em;
+  width: 46em;
+  height: 46em;
+  border-width: 0.8em;
+}
+
+.cam-shell.shape-sx70 .cam-lens-ring-knurl {
+  inset: 2em;
+}
+
+/* The flash bar slot spans the whole top edge — very distinctive. */
+.cam-shell.shape-sx70 .cam-flashwin {
+  top: 3em;
+  left: 8em;
+  right: 8em;
+  width: auto;
+  height: 6em;
+  border-radius: 0.8em;
+  background: linear-gradient(180deg, #2a2a2c 0 50%, #17171a 50% 100%);
+}
+
+.cam-shell.shape-sx70 .cam-finder {
+  top: 8em;
+  right: 10em;
+  width: 13em;
+  height: 9em;
+  border-radius: 1em;
+}
+
+.cam-shell.shape-sx70 .cam-led {
+  top: 9em;
+  left: 10em;
+}
+
+/* Shutter is a small round button on the top plate, left of the wheels. */
+.cam-shell.shape-sx70 .cam-shutter {
+  top: 70em;
+  right: 26em;
+  width: 11em;
+  height: 9em;
+  border-radius: 50% 50% 1em 1em;
+}
+
+.cam-shell.shape-sx70 .cam-shutter-hint {
+  top: 82em;
+  right: 24em;
+}
+
+.cam-shell.shape-sx70 .cam-brand {
+  left: 9em;
+  bottom: 5em;
+}
+
+.cam-shell.shape-sx70 .cam-brand strong {
+  font-size: 2.8em;
+}
+
+/* The twin exposure/focus wheels, top-left of the SX-70. */
+.cam-shell.shape-sx70 .cam-wheelpair {
+  display: flex;
+}
+
+/* Hide the standard dial; SX-70 uses the wheel pair instead. */
+.cam-shell.shape-sx70 .cam-simdial {
+  right: 6em;
+  bottom: 4em;
+}
+
+.cam-shell.shape-sx70 .cam-knob {
+  width: 9em;
+  height: 9em;
+}
+
+/* --- onestep: square body with the rainbow stripe --------------------- */
+.cam-shell.shape-onestep {
+  height: calc(var(--cam-w) * 1.88);
+}
+
+.cam-shell.shape-onestep .cam-body {
+  top: 102em;
+  height: 86em;
+  border-radius: 3em;
+}
+
+/* The rainbow stripe across the body face — OneStep's icon. */
+.cam-shell.shape-onestep .cam-body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44%;
+  height: 8em;
+  background: linear-gradient(
+    90deg,
+    #d0342c 0 16.6%,
+    #e8892c 16.6% 33.3%,
+    #e8c92c 33.3% 50%,
+    #4fa84a 50% 66.6%,
+    #3a7fc4 66.6% 83.3%,
+    #7a4fb0 83.3% 100%
+  );
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+/* Big centred lens — the OneStep's face is symmetric. */
+.cam-shell.shape-onestep .cam-lens {
+  top: 14em;
+  left: 26em;
+  width: 48em;
+  height: 48em;
+  border-width: 1em;
+}
+
+.cam-shell.shape-onestep .cam-flashwin {
+  top: 12em;
+  left: 6em;
+  width: 14em;
+  height: 14em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, #fffef8 0 30%, #dcdcd4 62%, #b0b0a8 100%);
+}
+
+.cam-shell.shape-onestep .cam-finder {
+  top: 12em;
+  right: 7em;
+  width: 13em;
+  height: 10em;
+  border-radius: 1.4em;
+}
+
+.cam-shell.shape-onestep .cam-led {
+  top: 27em;
+  left: 9em;
+}
+
+.cam-shell.shape-onestep .cam-shutter {
+  top: 20em;
+  right: 8em;
+  width: 15em;
+  height: 10em;
+  border-radius: 2em 2em 0.6em 0.6em;
+}
+
+.cam-shell.shape-onestep .cam-shutter-hint {
+  top: 33em;
+  right: 5em;
+}
+
+.cam-shell.shape-onestep .cam-brand {
+  left: 8em;
+  bottom: 5em;
+}
+
+.cam-shell.shape-onestep .cam-brand strong {
+  font-size: 2.6em;
+}
+
+.cam-shell.shape-onestep .cam-simdial {
+  right: 7em;
+  bottom: 4em;
+}
+
+/* --------------------------------------------------------------------------
+   The Evo lens dial and the SX-70 wheel pair are hidden by default and only
+   revealed by their structural variant.
+   ----------------------------------------------------------------------- */
+.cam-lensdial {
+  position: absolute;
+  right: 19em;
+  bottom: 5em;
+  display: none;
+  justify-items: center;
+  gap: 0.8em;
+  background: none;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+}
+
+.cam-lensdial .cam-knob {
+  width: 10em;
+  height: 10em;
+}
+
+.cam-lensdial small {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.3em;
+  letter-spacing: 0.14em;
+  color: var(--fuji-brand, #d7d7cf);
+  opacity: 0.72;
+  white-space: nowrap;
+}
+
+.cam-wheelpair {
+  position: absolute;
+  left: 40em;
+  top: 72em;
+  display: none;
+  gap: 2em;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cam-wheel {
+  width: 9em;
+  height: 9em;
+  border: 0.5em solid var(--fuji-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.5) 0 14%, transparent 44%),
+    repeating-conic-gradient(var(--fuji-silver-lo) 0 8deg, var(--fuji-silver) 8deg 16deg);
+  box-shadow: 0 0.5em 0 rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.cam-wheel::after {
+  content: "";
+  position: absolute;
+  top: 0.6em;
+  left: 50%;
+  width: 0.7em;
+  height: 2.6em;
+  margin-left: -0.35em;
+  border-radius: 0.7em;
+  background: var(--fuji-ink);
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive: the taller/shorter variants need their own width caps.
+   ----------------------------------------------------------------------- */
+@media (max-height: 760px) {
+  .cam-shell.shape-sx70 {
+    height: calc(var(--cam-w) * 1.5);
+  }
+}
