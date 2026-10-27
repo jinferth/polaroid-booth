@@ -31,7 +31,9 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Node 22+ is required: vitest 5 pulls in undici 8, which uses
+          # APIs that don't exist on Node 20.
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
